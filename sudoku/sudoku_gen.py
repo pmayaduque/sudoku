@@ -3,7 +3,7 @@ import copy
 import random
 
 level = "Medium"
-random.seed(42)
+
 
 """ [Level of Difficulty] = Input the level of difficulty of the sudoku puzzle. Difficulty levels
         include ‘Easy’ ‘Medium’ ‘Hard’ and ‘Insane’. Outputs a sudoku of desired
@@ -319,8 +319,11 @@ def equalChecker(s1, s2):
             return False
     return True
 
+def set_seed(seed):
+    random.seed(seed)
 
-def generate(level, seed = random.randint(0, 100)):
+def generate(level):
+
     """ Input the level of difficulty of the sudoku puzzle. Difficulty levels
         include ‘Easy’ ‘Medium’ ‘Hard’ and ‘Insane’. Outputs a sudoku of desired
         difficulty."""
@@ -330,7 +333,7 @@ def generate(level, seed = random.randint(0, 100)):
         p = perfectSudoku()
         s = puzzleGen(p)
         if s[2] != 'Easy':
-            return generate(level, seed)
+            return generate(level)
         t2 = time.time()
         t3 = t2 - t1
         print("Runtime is " + str(t3) + " seconds")
@@ -344,9 +347,9 @@ def generate(level, seed = random.randint(0, 100)):
             n += 1
             s = puzzleGen(p)
             if n > 50:
-                return generate(level, seed)
+                return generate(level)
         if s[2] != 'Medium':
-            return generate(level, seed)
+            return generate(level)
         t2 = time.time()
         t3 = t2 - t1
         print("Runtime is " + str(t3) + " seconds")
@@ -360,14 +363,14 @@ def generate(level, seed = random.randint(0, 100)):
             n += 1
             s = puzzleGen(p)
             if n > 50:
-                return generate(level, seed)
+                return generate(level)
         while s[2] == 'Medium':
             n += 1
             s = puzzleGen(p)
             if n > 50:
-                return generate(level, seed)
+                return generate(level)
         if s[2] != 'Hard':
-            return generate(level, seed)
+            return generate(level)
         t2 = time.time()
         t3 = t2 - t1
         print("Runtime is " + str(t3) + " seconds")
@@ -381,7 +384,7 @@ def generate(level, seed = random.randint(0, 100)):
             n += 1
             s = puzzleGen(p)
             if n > 50:
-                return generate(level, seed)
+                return generate(level)
         t2 = time.time()
         t3 = t2 - t1
         print("Runtime is " + str(t3) + " seconds")
@@ -391,3 +394,4 @@ def generate(level, seed = random.randint(0, 100)):
     else:
         raise (ValueError)
 
+generate("Medium", 42)
