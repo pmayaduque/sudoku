@@ -279,5 +279,7 @@ def graph_soduku(solution):
     return plt
 
 sudokuFilled = sudokuFill3rdRule(sudokuInitial)
+print(type(sudokuFilled))
 solution = recocidoSimulado(sudokuFilled)
+
 
