@@ -394,4 +394,3 @@ def generate(level):
     else:
         raise (ValueError)
 
-generate("Medium", 42)
