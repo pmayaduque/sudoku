@@ -320,7 +320,7 @@ def equalChecker(s1, s2):
     return True
 
 
-def main(level):
+def generate(level, seed = random.randint(0, 100)):
     """ Input the level of difficulty of the sudoku puzzle. Difficulty levels
         include ‘Easy’ ‘Medium’ ‘Hard’ and ‘Insane’. Outputs a sudoku of desired
         difficulty."""
@@ -330,7 +330,7 @@ def main(level):
         p = perfectSudoku()
         s = puzzleGen(p)
         if s[2] != 'Easy':
-            return main(level)
+            return generate(level, seed)
         t2 = time.time()
         t3 = t2 - t1
         print("Runtime is " + str(t3) + " seconds")
@@ -344,9 +344,9 @@ def main(level):
             n += 1
             s = puzzleGen(p)
             if n > 50:
-                return main(level)
+                return generate(level, seed)
         if s[2] != 'Medium':
-            return main(level)
+            return generate(level, seed)
         t2 = time.time()
         t3 = t2 - t1
         print("Runtime is " + str(t3) + " seconds")
@@ -360,14 +360,14 @@ def main(level):
             n += 1
             s = puzzleGen(p)
             if n > 50:
-                return main(level)
+                return generate(level, seed)
         while s[2] == 'Medium':
             n += 1
             s = puzzleGen(p)
             if n > 50:
-                return main(level)
+                return generate(level, seed)
         if s[2] != 'Hard':
-            return main(level)
+            return generate(level, seed)
         t2 = time.time()
         t3 = t2 - t1
         print("Runtime is " + str(t3) + " seconds")
@@ -381,7 +381,7 @@ def main(level):
             n += 1
             s = puzzleGen(p)
             if n > 50:
-                return main(level)
+                return generate(level, seed)
         t2 = time.time()
         t3 = t2 - t1
         print("Runtime is " + str(t3) + " seconds")
@@ -391,5 +391,3 @@ def main(level):
     else:
         raise (ValueError)
 
-a = main(level)
-print(type(a))
