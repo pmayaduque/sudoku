@@ -382,9 +382,9 @@ def generate(level):
             return generate(level)
         t2 = time.time()
         t3 = t2 - t1
-        print("Runtime is " + str(t3) + " seconds")
-        print("Guesses: " + str(s[1]))
-        print("Level: " + str(s[2]))
+        #print("Runtime is " + str(t3) + " seconds")
+        #print("Guesses: " + str(s[1]))
+        #print("Level: " + str(s[2]))
         return printSudoku(s[0])
     if level == 'Insane':
         p = perfectSudoku()
@@ -396,12 +396,10 @@ def generate(level):
                 return generate(level)
         t2 = time.time()
         t3 = t2 - t1
-        print("Runtime is " + str(t3) + " seconds")
-        print("Guesses: " + str(s[1]))
-        print("Level: " + str(s[2]))
+        #print("Runtime is " + str(t3) + " seconds")
+        #print("Guesses: " + str(s[1]))
+        #print("Level: " + str(s[2]))
         return printSudoku(s[0])
     else:
         raise (ValueError)
 
-set_seed(42)
-generate("Easy")
