@@ -196,22 +196,17 @@ def swapRandomCells(sudo):
     return newSudo
 
 
-def recocidoSimulado(sudo):
+def recocidoSimulado(sudo, temp= 100, alpha = 0.98, iter = 100):
+
     sudoCopy = copySudoku(sudo)
-
     costs = []
-
-    temp = 250
-
     changeProbs = []
-
     compteur = 0
+
     while temp > 1:
-
         changeProb = 0
-
-        param = 10
-        for i in range(param):
+        #param = 10
+        for i in range(iter):
 
             if costGlobal(sudoCopy) == 0:
                 print("Sudoku solved")
@@ -229,31 +224,32 @@ def recocidoSimulado(sudo):
                 sudoCopy = sudoAfter
             else:
                 uniformValue = random.uniform(0, 1)
-                if (uniformValue <= exp(-30 * delta / temp)):
+                if (uniformValue <= exp(-30*delta / temp)):
                     changeProb += 1
                     sudoCopy = sudoAfter
 
             costs.append(costGlobal(sudoCopy))
         changeProbs.append(changeProb)
         compteur += 1
-        temp = 0.97 * temp
+        temp = alpha * temp
 
-    plt.plot(np.arange(len(costs)), costs)
-    plt.show()
+    #plt.plot(np.arange(len(costs)), costs)
+    #plt.show()
 
-    percents = list(map(lambda x: float(x) / param * 100, changeProbs))
-    plt.plot(np.arange(len(percents)), percents)
-    plt.show()
+    percents = list(map(lambda x: float(x) / iter * 100, changeProbs))
+    #plt.plot(np.arange(len(percents)), percents)
+    #plt.show()
 
-    print("Final cost : " + str(costGlobal(sudoCopy)))
-    print("Temperature changed " + str(compteur) + " times")
+    #print("Final cost : " + str(costGlobal(sudoCopy)))
+    #print("Temperature changed " + str(compteur) + " times")
     return sudoCopy, costs, percents
 
 
-lines = np.arange(1,10)
-columns = np.arange(1,10)
+
 
 def graph_soduku(solution):
+    lines = np.arange(1, 10)
+    columns = np.arange(1, 10)
     fig, ax = plt.subplots(figsize=(15,8))
     im = ax.imshow(solution)
 
@@ -278,8 +274,8 @@ def graph_soduku(solution):
     fig.tight_layout()
     return plt
 
-sudokuFilled = sudokuFill3rdRule(sudokuInitial)
-print(type(sudokuFilled))
-solution = recocidoSimulado(sudokuFilled)
+#sudokuFilled = sudokuFill3rdRule(sudokuInitial)
+#print(type(sudokuFilled))
+#solution = recocidoSimulado(sudokuFilled)
 
 
