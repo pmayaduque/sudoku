@@ -199,7 +199,7 @@ def swapRandomCells(sudo):
     return newSudo
 
 
-def recocidoSimulado(sudo, temp= 500, alpha = 0.98, iter = 500):
+def recocidoSimulado(sudo, temp= 500, alpha = 0.98, iter = 500, scale = 30):
 
     sudoCopy = copySudoku(sudo)
     costs = []
@@ -227,7 +227,7 @@ def recocidoSimulado(sudo, temp= 500, alpha = 0.98, iter = 500):
                 sudoCopy = sudoAfter
             else:
                 uniformValue = random.uniform(0, 1)
-                if (uniformValue <= exp(-30*delta / temp)):
+                if (uniformValue <= exp(-scale*delta / temp)):
                     changeProb += 1
                     sudoCopy = sudoAfter
 
