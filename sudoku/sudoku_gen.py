@@ -307,8 +307,8 @@ def puzzleGen(sudoku):
         s = solve(copy_s)
         if s[0] == False:
             f = solve(sudoku)
-            print("Guesses: " + str(f[1]))
-            print("Level: " + str(f[2]))
+            #print("Guesses: " + str(f[1]))
+            #print("Level: " + str(f[2]))
             return printSudoku(sudoku)
         elif equalChecker(s[0], solve(copy_s)[0]):
             if equalChecker(s[0], solve(copy_s)[0]):
@@ -344,9 +344,9 @@ def generate(level):
             return generate(level)
         t2 = time.time()
         t3 = t2 - t1
-        print("Runtime is " + str(t3) + " seconds")
-        print("Guesses: " + str(s[1]))
-        print("Level: " + str(s[2]))
+        #print("Runtime is " + str(t3) + " seconds")
+        #print("Guesses: " + str(s[1]))
+        #print("Level: " + str(s[2]))
         return printSudoku(s[0])
     if level == 'Medium':
         p = perfectSudoku()
