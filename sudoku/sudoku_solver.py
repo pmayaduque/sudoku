@@ -210,10 +210,10 @@ def recocidoSimulado(sudo, temp= 500, alpha = 0.98, iter = 500):
 
             if costGlobal(sudoCopy) == 0:
                 print("Sudoku solved")
-                plt.plot(np.arange(len(costs)), costs)
-                plt.show()
-                print("Final cost : " + str(costGlobal(sudoCopy)))
-                print("Temperature changed " + str(compteur) + " times")
+                #plt.plot(np.arange(len(costs)), costs)
+                #plt.show()
+                #print("Final cost : " + str(costGlobal(sudoCopy)))
+                #print("Temperature changed " + str(compteur) + " times")
                 return sudoCopy
 
             sudoAfter = swapRandomCells(sudoCopy)
@@ -240,7 +240,7 @@ def recocidoSimulado(sudo, temp= 500, alpha = 0.98, iter = 500):
     #plt.plot(np.arange(len(percents)), percents)
     #plt.show()
 
-    print("Final cost : " + str(costGlobal(sudoCopy)))
+    #print("Final cost : " + str(costGlobal(sudoCopy)))
     #print("Temperature changed " + str(compteur) + " times")
     return sudoCopy, costs, percents
 
@@ -274,9 +274,25 @@ def graph_soduku(solution):
     fig.tight_layout()
     return plt
 
-sudokuFilled = sudokuFill3rdRule(sudokuInitial)
+def print_solution_verb(solution):
+    print("Final cost : " + str(costGlobal(solution)))
+    # lenth of the sudoku
+    sudoLen = len(solution)
 
-solution = recocidoSimulado(sudokuFilled)
+    for i in range(sudoLen):
+        line = solution[i]
+        for j in range(sudoLen):
+            if line.count(j + 1) == 0:
+                print("Line " + str(i + 1) + " : missing : " + str(j + 1))
+    for i in range(sudoLen):
+        column = np.transpose(solution)[i]
+        for j in range(sudoLen):
+            if column.tolist().count(j + 1) == 0:
+                print("Column " + str(i + 1) + " : missing : " + str(j + 1))
+
+# sudokuFilled = sudokuFill3rdRule(sudokuInitial)
+# solution, costs, percents = recocidoSimulado(sudokuFilled, temp= 250, alpha = 0.97, iter = 100)
+# print_solution_verb(solution)
 
 
 
