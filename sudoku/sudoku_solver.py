@@ -254,7 +254,6 @@ def recocidoSimulado(initial, sudo, temp= 500, alpha = 0.98, iter = 500, scale =
 
     #print("Final cost : " + str(costGlobal(sudoCopy)))
     #print("Temperature changed " + str(compteur) + " times")
-    print(percents)
     return (sudoCopy, costs, percents)
 
 
