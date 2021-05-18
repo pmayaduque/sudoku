@@ -1,6 +1,7 @@
 import time
 import copy
 import random
+import numpy as np
 
 level = "Medium"
 
@@ -99,7 +100,14 @@ def emptySudoku():
 
 
 def printSudoku(sudoku):
-    print(sudoku[80].returnSolved())
+    sudo_ini = np.zeros((9,9))
+    for i in range(0,9):
+        for j in range(0,9):
+            sudo_ini[i][j] = int(sudoku[j + i*9].returnSolved())
+    return sudo_ini
+
+
+def printSudoku1(sudoku):
     '''Prints out a sudoku in a format that is easy for a human to read'''
     row1 = []
     row2 = []
@@ -352,9 +360,10 @@ def generate(level):
             return generate(level)
         t2 = time.time()
         t3 = t2 - t1
-        print("Runtime is " + str(t3) + " seconds")
-        print("Guesses: " + str(s[1]))
-        print("Level: " + str(s[2]))
+        #print("Runtime is " + str(t3) + " seconds")
+        #print("Guesses: " + str(s[1]))
+        #print("Level: " + str(s[2]))
+
         return printSudoku(s[0])
     if level == 'Hard':
         p = perfectSudoku()
@@ -394,3 +403,5 @@ def generate(level):
     else:
         raise (ValueError)
 
+set_seed(42)
+generate("Easy")
