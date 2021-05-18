@@ -7,15 +7,17 @@ import matplotlib.pyplot as plt
 import random
 from math import exp
 
-sudokuInitial = np.array([[0,0,0,0,3,0,6,0,0],
-                         [5,0,0,9,0,0,4,0,0],
-                         [0,8,0,6,0,7,0,0,9],
-                         [0,7,0,0,0,0,8,0,1],
-                         [0,5,0,0,8,0,0,2,0],
-                         [3,0,8,0,0,0,0,5,0],
-                         [1,0,0,8,0,4,0,9,0],
-                         [0,0,2,0,0,6,0,0,5],
-                         [0,0,9,0,1,0,0,0,0]])
+# sudokuInitial = np.array([[0,0,0,0,3,0,6,0,0],
+#                          [5,0,0,9,0,0,4,0,0],
+#                          [0,8,0,6,0,7,0,0,9],
+#                          [0,7,0,0,0,0,8,0,1],
+#                          [0,5,0,0,8,0,0,2,0],
+#                          [3,0,8,0,0,0,0,5,0],
+#                          [1,0,0,8,0,4,0,9,0],
+#                          [0,0,2,0,0,6,0,0,5],
+#                          [0,0,9,0,1,0,0,0,0]])
+
+
 
 def set_seed(seed):
     random.seed(seed)
@@ -82,8 +84,6 @@ def sudokuFill3rdRule1(sudo, i,j):
     sq = square(sudo, i,j)
     noFixedPos = nonFixedPosition(sudo,i,j)
     for x in range(len(noFixedPos)) :
-        print(noFixedPos)
-        print('noFixedPos[', x, '][0], noFixedPos[', x, '][1]) = ', listPossibleNumbers(sudo, i, j))
         sq[noFixedPos[x][0], noFixedPos[x][1]] = listPossibleNumbers(sudo,i,j)[x]
 
     return sq
@@ -169,7 +169,7 @@ def ChangeCoordinates(sudo, i,j,u,v):
     return [(i-1)*sudoSquareLen+u , (j-1)*sudoSquareLen+v]
 
 
-def swapRandomCells(sudo):
+def swapRandomCells(initial, sudo):
     # lenth of the sudoku
     sudoLen = len(sudo)
     # lenth of a square of the sudoku
@@ -180,7 +180,12 @@ def swapRandomCells(sudo):
     rd1 = random.randint(1, sudoSquareLen)
     rd2 = random.randint(1, sudoSquareLen)
     # square = square(sudoku, rd1, rd2)
-    A = nonFixedPosition(sudokuInitial, rd1, rd2)  ##list of non fixed positions in a random square of the sudoku
+    A = nonFixedPosition(initial, rd1, rd2)
+    while len(A) <= 1:
+        rd1 = random.randint(1, sudoSquareLen)
+        rd2 = random.randint(1, sudoSquareLen)
+        A = nonFixedPosition(initial, rd1, rd2)  ##list of non fixed positions in a random square of the sudoku
+
 
     # chose two random cells among the non fixed ones in the random square
     rd3 = random.randint(0, len(A) - 1)
@@ -202,9 +207,9 @@ def swapRandomCells(sudo):
     return newSudo
 
 
-def recocidoSimulado(sudo, temp= 500, alpha = 0.98, iter = 500, scale = 30):
-
+def recocidoSimulado(initial, sudo, temp= 500, alpha = 0.98, iter = 500, scale = 30):
     sudoCopy = copySudoku(sudo)
+
     costs = []
     changeProbs = []
     compteur = 0
@@ -220,9 +225,10 @@ def recocidoSimulado(sudo, temp= 500, alpha = 0.98, iter = 500, scale = 30):
                 #plt.show()
                 #print("Final cost : " + str(costGlobal(sudoCopy)))
                 #print("Temperature changed " + str(compteur) + " times")
-                return sudoCopy
+                percents = list(map(lambda x: float(x) / iter * 100, changeProbs))
+                return (sudoCopy, costs, percents)
 
-            sudoAfter = swapRandomCells(sudoCopy)
+            sudoAfter = swapRandomCells(initial, sudoCopy)
 
             delta = costGlobal(sudoAfter) - costGlobal(sudoCopy)
 
@@ -248,7 +254,8 @@ def recocidoSimulado(sudo, temp= 500, alpha = 0.98, iter = 500, scale = 30):
 
     #print("Final cost : " + str(costGlobal(sudoCopy)))
     #print("Temperature changed " + str(compteur) + " times")
-    return sudoCopy, costs, percents
+    print(percents)
+    return (sudoCopy, costs, percents)
 
 
 
