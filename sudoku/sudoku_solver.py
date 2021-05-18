@@ -17,6 +17,9 @@ sudokuInitial = np.array([[0,0,0,0,3,0,6,0,0],
                          [0,0,2,0,0,6,0,0,5],
                          [0,0,9,0,1,0,0,0,0]])
 
+def set_seed(seed):
+    random.seed(seed)
+
 def copySudoku(sudoku):
     sudokuCopy = []
     for i in range(len(sudoku)):
