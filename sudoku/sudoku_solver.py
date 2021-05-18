@@ -196,7 +196,7 @@ def swapRandomCells(sudo):
     return newSudo
 
 
-def recocidoSimulado(sudo, temp= 100, alpha = 0.98, iter = 100):
+def recocidoSimulado(sudo, temp= 500, alpha = 0.98, iter = 500):
 
     sudoCopy = copySudoku(sudo)
     costs = []
@@ -240,7 +240,7 @@ def recocidoSimulado(sudo, temp= 100, alpha = 0.98, iter = 100):
     #plt.plot(np.arange(len(percents)), percents)
     #plt.show()
 
-    #print("Final cost : " + str(costGlobal(sudoCopy)))
+    print("Final cost : " + str(costGlobal(sudoCopy)))
     #print("Temperature changed " + str(compteur) + " times")
     return sudoCopy, costs, percents
 
@@ -270,12 +270,13 @@ def graph_soduku(solution):
             text = ax.text(j, i, solution[i][j],
                            ha="center", va="center", color="w", weight="bold", fontsize=20)
 
-    ax.set_title("Sudoku resolved", fontsize=30)
+    #ax.set_title("Sudoku resolved", fontsize=30)
     fig.tight_layout()
     return plt
 
-#sudokuFilled = sudokuFill3rdRule(sudokuInitial)
-#print(type(sudokuFilled))
-#solution = recocidoSimulado(sudokuFilled)
+sudokuFilled = sudokuFill3rdRule(sudokuInitial)
+
+solution = recocidoSimulado(sudokuFilled)
+
 
 
