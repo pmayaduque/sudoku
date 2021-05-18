@@ -100,7 +100,7 @@ def emptySudoku():
 
 
 def printSudoku(sudoku):
-    sudo_ini = np.zeros((9,9))
+    sudo_ini = np.zeros((9,9), dtype=int)
     for i in range(0,9):
         for j in range(0,9):
             sudo_ini[i][j] = int(sudoku[j + i*9].returnSolved())
