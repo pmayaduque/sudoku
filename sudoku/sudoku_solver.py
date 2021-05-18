@@ -82,7 +82,10 @@ def sudokuFill3rdRule1(sudo, i,j):
     sq = square(sudo, i,j)
     noFixedPos = nonFixedPosition(sudo,i,j)
     for x in range(len(noFixedPos)) :
-        sq[noFixedPos[x][0], noFixedPos[x][1]] = listPossibleNumbers(sudokuInitial,i,j)[x]
+        print(noFixedPos)
+        print('noFixedPos[', x, '][0], noFixedPos[', x, '][1]) = ', listPossibleNumbers(sudo, i, j))
+        sq[noFixedPos[x][0], noFixedPos[x][1]] = listPossibleNumbers(sudo,i,j)[x]
+
     return sq
 
 ## function that fills the sudoku by putting numbers that respect the 3rd rule
