@@ -207,7 +207,7 @@ def swapRandomCells(initial, sudo):
     return newSudo
 
 
-def recocidoSimulado(initial, sudo, temp= 500, alpha = 0.98, iter = 500, scale = 30):
+def recocidoSimulado(initial, sudo, temp= 500, alpha = 0.98, iter = 30, scale = 30):
     sudoCopy = copySudoku(sudo)
 
     costs = []
@@ -220,7 +220,7 @@ def recocidoSimulado(initial, sudo, temp= 500, alpha = 0.98, iter = 500, scale =
         for i in range(iter):
 
             if costGlobal(sudoCopy) == 0:
-                print("Sudoku solved")
+                #print("Sudoku solved")
                 #plt.plot(np.arange(len(costs)), costs)
                 #plt.show()
                 #print("Final cost : " + str(costGlobal(sudoCopy)))
